@@ -53,7 +53,6 @@ public class Dungeon {
                 this.items.put(f, new CItem(this.folder, f));
             }
         }
-        Bukkit.getLogger().info("" + this.tiling);
         List<?> floorlist = dungeonConfig(folder).getList("floors");
         assert floorlist != null;
         for (Object o : floorlist) {
@@ -119,6 +118,14 @@ public class Dungeon {
                             loc,
                             Double.parseDouble(sign.getLine(3))
                     )); loc.getBlock().setType(Material.AIR); break;
+                case "rand elite":
+                    spawners.add(new MobSpawner(
+                            sign.getLine(1),
+                            Integer.parseInt(sign.getLine(2)),
+                            loc,
+                            Double.parseDouble(sign.getLine(3)),
+                            floor
+                    ));
             }
         }
     }
@@ -137,23 +144,21 @@ public class Dungeon {
     }
 
     public void destroy(){
-        Bukkit.getLogger().info("FUCK");
         for (MobSpawner spawner : spawners) {
             spawner.destroy(this.size);
         }
         spawners = new ArrayList<>();
         exits = new ArrayList<>();
         start = null;
-        Bukkit.getLogger().info("YOU");
         for (int x = 0; x <= size; x++) { for (int y = 0; y <= this.tiling * 3; y++) { for (int z = 0; z <= size; z++) {
             Block b = origin.clone().add(x, y, z).getBlock();
             if (b.getType() == Material.CHEST) {
                 ((Chest) b.getState()).getBlockInventory().clear();
             } b.setType(Material.AIR);
-        }}} Bukkit.getLogger().info("ASSHOLE");
+        }}}
         for (int x = -1; x <= size + 1; x++) { for (int y = 0; y <= this.tiling; y++) {
             getWls(x, y).forEach(loc -> loc.getBlock().setType(Material.AIR));
-        }} Bukkit.getLogger().info(">:(");
+        }}
         for (Entity current : this.origin.getWorld().getEntities()) {
             if (current instanceof Item) { current.remove(); }
         }

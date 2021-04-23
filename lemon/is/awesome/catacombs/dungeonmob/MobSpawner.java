@@ -6,7 +6,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import static lemon.is.awesome.catacombs.Utilities.elitePowers;
 import static lemon.is.awesome.catacombs.Utilities.playerRadius;
 import static lemon.is.awesome.catacombs.dungeonmob.Mob.alive;
 
@@ -16,6 +18,8 @@ public class MobSpawner {
     private final int max_cooldown; // The time between spawns in seconds
     public final Location loc; // The location of the MobSpawner
     public final double aoe; // The range of the spawner
+    public String[] powers = new String[3];
+    public int level = 0;
     public ArrayList<Entity> mobs;
     private final String elitemob;
     private final boolean elite;
@@ -39,10 +43,15 @@ public class MobSpawner {
         this.elite = true; this.mob = null; this.max_cooldown = cooldown;
         randelite = false;
     }
-    public MobSpawner(String elitemob, int cooldown, Location loc, double aoe, boolean x) {
-        this.elite = true; this.elitemob = elitemob; this.cooldown = cooldown; this.max_cooldown = cooldown;
-        this.loc = loc; this.aoe = aoe;
-        randelite = x;
+    public MobSpawner(String elitemob, int cooldown, Location loc, double aoe, int level) {
+        this.elitemob = elitemob; this.cooldown = cooldown; this.loc = loc; this.aoe = aoe;
+        this.mobs = new ArrayList<>(); this.level = level;
+        this.elite = true; this.mob = null; this.max_cooldown = cooldown;
+        randelite = false;
+        Random r = new Random();
+        for (int i = 0; i <= level % 5; i++) {
+            this.powers[i] = elitePowers.get(r.nextInt(elitePowers.size()));
+        }
     }
 
     public void step(){
@@ -65,7 +74,16 @@ public class MobSpawner {
                                     loc.getZ()));
                 else
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-                            String.format(""));
+                            String.format("/em spawnlocationelite %s %s %s %s %s %s %s %s %s",
+                                    elitemob,
+                                    loc.getWorld().getName(),
+                                    loc.getX(),
+                                    loc.getY(),
+                                    loc.getZ(),
+                                    level,
+                                    powers[0],
+                                    powers[1],
+                                    powers[2]));
             } cooldown = max_cooldown;
         }
     }

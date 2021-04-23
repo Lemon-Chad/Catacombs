@@ -35,6 +35,52 @@ import static lemon.is.awesome.catacombs.whaaa.EnglishNumberToWords.convert;
 
 public class Utilities {
 
+    // I hate all of this.
+    public static ArrayList<String> elitePowers = new ArrayList<>(Arrays.asList(
+            "attack_arrow.yml",
+            "attack_blinding.yml",
+            "attack_confusing.yml",
+            "attack_fire.yml",
+            "attack_fireball.yml",
+            "attack_freeze.yml",
+            "attack_gravity.yml",
+            "attack_lightning.yml",
+            "attack_poison.yml",
+            "attack_push.yml",
+            "attack_vacuum.yml",
+            "attack_weakness.yml",
+            "attack_web.yml",
+            "attack_wither.yml",
+            "bonus_loot.yml",
+            "bullet_hell.yml",
+            "corpse.yml",
+            "flame_pyre.yml",
+            "flamethrower.yml",
+            "gold_explosion.yml",
+            "gold_shotgun.yml",
+            "hyper_loot.yml",
+            "implosion.yml",
+            "invisibility.yml",
+            "invulnerability_arrow.yml",
+            "invulnerability_fall_damage.yml",
+            "invulnerability_fire.yml",
+            "invulnerability_knockback.yml",
+            "meteor_shower.yml",
+            "moonwalk.yml",
+            "movement_speed.yml",
+            "skeleton_pillar.yml",
+            "skeleton_tracking_arrow.yml",
+            "spirit_walk.yml",
+            "summon_embers.yml",
+            "summon_raug.yml",
+            "summon_the_returned.yml",
+            "taunt.yml",
+            "zombie_bloat.yml",
+            "zombie_friends.yml",
+            "zombie_necronomicon.yml",
+            "zombie_parents.yml"
+    ));
+
     // I stole the structure stuff from Mr. Mastadons
     public static DefinedStructure loadSingleStructure(File source) throws IOException {
         DefinedStructure structure = new DefinedStructure();
