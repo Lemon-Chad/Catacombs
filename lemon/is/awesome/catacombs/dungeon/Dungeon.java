@@ -56,6 +56,7 @@ public class Dungeon {
         List<?> floorlist = dungeonConfig(folder).getList("floors");
         assert floorlist != null;
         for (Object o : floorlist) {
+            Bukkit.getLogger().info(String.valueOf(o));
             floors.add(new Floor((String) o));
         }
         ConfigurationSection floorSection = dungeonConfig(folder).getConfigurationSection("special_floors");
@@ -66,7 +67,7 @@ public class Dungeon {
         }
         Catacombs.addDungeon(this);
         // Adds the dungeon to the plugin map, so it runs its step function every second
-        id = Catacombs.id;
+        id = Catacombs.id - 1;
         // Sets the id to the current dungeon id
     }
     public Group getPlayers() {
@@ -118,14 +119,14 @@ public class Dungeon {
                             loc,
                             Double.parseDouble(sign.getLine(3))
                     )); loc.getBlock().setType(Material.AIR); break;
-                case "rand elite":
+                case "levelite":
                     spawners.add(new MobSpawner(
                             sign.getLine(1),
                             Integer.parseInt(sign.getLine(2)),
                             loc,
                             Double.parseDouble(sign.getLine(3)),
                             floor
-                    ));
+                    )); loc.getBlock().setType(Material.AIR); break;
             }
         }
     }

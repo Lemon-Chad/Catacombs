@@ -33,7 +33,7 @@ public class Commands implements CommandExecutor {
                     Catacombs.getGroup((Player) sender),
                     loc, size);
             dungeon.generate();
-            sender.sendMessage("Created dungeon with id " + dungeon.getId());
+            sender.sendMessage("Created dungeon with id " + (dungeon.getId()));
             return true;
         }
         if (cmd.getName().equals("destroydungeon") && args.length == 1) {
