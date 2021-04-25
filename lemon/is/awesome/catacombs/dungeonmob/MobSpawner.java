@@ -66,7 +66,7 @@ public class MobSpawner {
                                     loc.getY(),
                                     loc.getZ()));
                 else {
-                    String c = String.format("em spawnlocationelite %s %s %s %s %s %s",
+                    String c = String.format("em spawnlocationcustomlevel %s %s %s %s %s %s",
                             elitemob,
                             level,
                             loc.getWorld().getName(),
@@ -84,15 +84,6 @@ public class MobSpawner {
 
     public void destroy(int radius) {
         for (Entity mob : this.mobs) {
-            if (elite) {
-                Entity e = loc.getWorld().spawnEntity(loc, EntityType.AREA_EFFECT_CLOUD);
-                Bukkit.dispatchCommand(e, String.format(
-                        "/em killtype %s %s",
-                        elitemob,
-                        radius
-                ));
-                continue;
-            }
             if (alive(mob)) {
                 mob.remove();
             }

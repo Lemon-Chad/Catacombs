@@ -16,6 +16,8 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.io.File;
@@ -147,6 +149,12 @@ public class Dungeon {
     public void destroy(){
         for (MobSpawner spawner : spawners) {
             spawner.destroy(this.size);
+        }
+        for (Player player : players.players) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.format("lp user %s permission set elitemobs.* true", player.getName()));
+            player.performCommand(String.format("em killaggressive %s", size));
+            player.performCommand(String.format("em killpassive %s", size));
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.format("lp user %s permission unset elitemobs.*", player.getName()));
         }
         spawners = new ArrayList<>();
         exits = new ArrayList<>();
