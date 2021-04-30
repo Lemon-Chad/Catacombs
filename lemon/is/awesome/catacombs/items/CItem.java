@@ -12,13 +12,13 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class CItem {
     private final Material item;
     private final String name;
     private final double damage;
+    private final List<String> lore;
     public CItem(String folder, String item) {
         Bukkit.getLogger().info(folder);
         FileConfiguration dat = loadConfig(addToPath(folder, "items"), item);
@@ -28,6 +28,11 @@ public class CItem {
             this.damage = dat.getDouble("damage");
         } else {
             this.damage = -29838493;
+        }
+        if (dat.getKeys(false).contains("lore")) {
+            this.lore = dat.getStringList("lore");
+        } else {
+            this.lore = new ArrayList<>();
         }
     }
 
@@ -45,6 +50,7 @@ public class CItem {
                     )
             );
         }
+        meta.setLore(this.lore);
         meta.setDisplayName(this.name);
         i.setItemMeta(meta);
         return i;
