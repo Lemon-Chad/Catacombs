@@ -17,12 +17,13 @@ public class MobSpawner {
     public final Location loc; // The location of the MobSpawner
     public final double aoe; // The range of the spawner
     public int level = 0;
+    public int mobCount = 0;
     public ArrayList<Entity> mobs;
     private final String elitemob;
     private final boolean elite;
     private final boolean randelite;
     public MobSpawner(Mob mob, int cooldown, Location loc, double aoe) {
-        this.mob = mob; this.cooldown = cooldown; this.max_cooldown = cooldown; this.loc = loc; this.aoe = aoe * aoe;
+        this.mob = mob; this.cooldown = cooldown; this.max_cooldown = cooldown; this.loc = loc; this.aoe = aoe;
         this.mobs = new ArrayList<>();
         this.elite = false; this.elitemob = null;
         randelite = false;
@@ -53,7 +54,8 @@ public class MobSpawner {
         // Decrement the cooldown
         cooldown--;
         // If cooldown is less than or equal to 0, spawns the mob and resets the cooldown
-        if (cooldown <= 0) {
+        if (cooldown <= 0 && mobCount <= 10) {
+            mobCount++;
             if (!elite) {
                 this.mobs.add(mob.spawn(loc));
             } else {

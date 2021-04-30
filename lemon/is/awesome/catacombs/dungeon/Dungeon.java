@@ -151,10 +151,9 @@ public class Dungeon {
             spawner.destroy(this.size);
         }
         for (Player player : players.players) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.format("lp user %s permission set elitemobs.* true", player.getName()));
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.format("lp user %s permission settemp elitemobs.* true 1", player.getName()));
             player.performCommand(String.format("em killaggressive %s", size));
             player.performCommand(String.format("em killpassive %s", size));
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.format("lp user %s permission unset elitemobs.*", player.getName()));
         }
         spawners = new ArrayList<>();
         exits = new ArrayList<>();

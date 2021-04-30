@@ -241,7 +241,7 @@ public class Utilities {
     public static boolean playerRadius(Location loc, double radius) {
         List<Player> players = loc.getWorld().getPlayers();
         for (Player player : players) {
-            if (player.getLocation().distanceSquared(loc) <= radius) {return true;}
+            if (player.getLocation().distance(loc) <= radius) {return true;}
         } // For every player, if distance between it and target location < radius, return true
         return false;
     }
