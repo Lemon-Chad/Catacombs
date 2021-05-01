@@ -16,25 +16,20 @@ import java.util.*;
 
 public class CItem {
     private final Material item;
-    private final String MaterialName;
     private final String name;
     private final double damage;
-    private final List<String> lore;
+    private List<String> lore = new ArrayList<>();
     public CItem(String folder, String item) {
         FileConfiguration dat = loadConfig(addToPath(folder, "items"), item);
         this.item = Material.getMaterial(Objects.requireNonNull(dat.getString("item")));
-        this.MaterialName = dat.getString("item");
-        this.name = dat.getString("name").replaceAll("&", "§");
+        this.name = Objects.requireNonNull(dat.getString("name")).replaceAll("&", "§");
         if (dat.getKeys(false).contains("damage")) {
             this.damage = dat.getDouble("damage");
         } else {
             this.damage = -29838493;
         }
         if (dat.getKeys(false).contains("lore")) {
-            this.lore = dat.getStringList("lore");
-            this.lore.forEach((String element) -> element.replaceAll("&", "§"));
-        } else {
-            this.lore = new ArrayList<>();
+            dat.getStringList("lore").forEach((String element) -> this.lore.add(element.replaceAll("&", "§")));
         }
     }
 
