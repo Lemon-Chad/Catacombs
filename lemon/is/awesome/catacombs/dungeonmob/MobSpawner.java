@@ -76,7 +76,6 @@ public class MobSpawner {
                             Math.round(loc.getY()),
                             Math.round(loc.getZ())
                     );
-                    Bukkit.getLogger().info(c);
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
                             c);
                 }

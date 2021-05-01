@@ -56,7 +56,6 @@ public class Dungeon {
         List<?> floorlist = dungeonConfig(folder).getList("floors");
         assert floorlist != null;
         for (Object o : floorlist) {
-            Bukkit.getLogger().info(String.valueOf(o));
             floors.add(new Floor((String) o));
         }
         ConfigurationSection floorSection = dungeonConfig(folder).getConfigurationSection("special_floors");
