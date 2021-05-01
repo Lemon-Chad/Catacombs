@@ -3,7 +3,6 @@ package lemon.is.awesome.catacombs.items;
 import static lemon.is.awesome.catacombs.Utilities.addToPath;
 import static lemon.is.awesome.catacombs.Utilities.loadConfig;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -18,7 +17,7 @@ public class CItem {
     private final Material item;
     private final String name;
     private final double damage;
-    private List<String> lore = new ArrayList<>();
+    private final List<String> lore = new ArrayList<>();
     public CItem(String folder, String item) {
         FileConfiguration dat = loadConfig(addToPath(folder, "items"), item);
         this.item = Material.getMaterial(Objects.requireNonNull(dat.getString("item")));
